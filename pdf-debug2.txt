@@ -1,0 +1,64 @@
+OBJ HEADERS FOUND: 5,7,9,11,13,15,17,19,21,45,46,47,48,49,50,51,52,56,59,61,65,69,73,77,82,85,86
+has obj 4 header: false
+OBJSTM HEADER: 85 0 obj <</Type /ObjStm/N 59/First 480/Filter /FlateDecode/Length 4481>> stream 
+OBJSTM N=59 First=480 slen=16821
+OBJSTM HEADER NUMS: 1,0,2,93,3,2682,4,2845,6,3020,8,3190,10,3360,12,3530,14,3701,16,3872,18,4043,20,4214,22,4385,23,4556,24,4795,25,5020,26,5241,27,5355,28,5476,29,5586
+  -> obj 1 : <</Type /Pages/Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R]/Count 9>>
+  -> obj 2 : <</Type /Catalog/Pages 1 0 R/Outlines 44 0 R/Names <</Dests <</Names [(architecture-de-fichiers-attendue) [20 0 R /XYZ 62.25 516.584764 0] <feff0061007500640069006f002d003100300030002d00700072006f006300e90064007500720061006c002d007700650062002d0061007500640069
+  -> obj 3 : <</lab-d50 [/Lab <</WhitePoint [0.964296 1 0.825105]/Range [-125 125 -125 125]>>]/lab-d65 [/Lab <</WhitePoint [0.950456 1 1.089058]/Range [-125 125 -125 125]>>]>>
+  -> obj 4 : <</ExtGState <</a1.0 <</ca 1>>/A1.0 <</CA 1>>/a1 <</ca 1>>/A0.2 <</CA 0.2>>/a0.2 <</ca 0.2>>>>/XObject <</x0 82 0 R>>/Pattern <<>>/Shading <<>>/ColorSpace 3 0 R/Font 81 0 R>>
+  -> obj 6 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 5 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 8 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 7 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 10 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 9 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 12 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 11 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 14 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 13 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 16 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 15 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 18 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 17 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 20 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 19 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 22 : <</Type /Page/Parent 1 0 R/MediaBox [0 0 595.275591 841.889764]/Contents 21 0 R/Resources 4 0 R/TrimBox [0 0 595.275591 841.889764]/BleedBox [0 0 595.275591 841.889764]>>
+  -> obj 23 : <</Title <feff00500052004f004d00500054002000c000200043004f0050004900450052002d0043004f004c004c00450052002020140020004100520052004f005700460041004c004c>/Dest [6 0 R /XYZ 62.25 773.579764 0]/Count 20/First 24 0 R/Last 43 0 R/Parent 44 0 R>>
+  -> obj 24 : <</Title <feff0030002e0020005200c80047004c004500530020004400450020004c004900560052004100490053004f004e002000280043005200490054004900510055004500530029>/Dest [6 0 R /XYZ 62.25 590.564764 0]/Count 0/Parent 23 0 R/Next 25 0 R>>
+  -> obj 25 : <</Title <feff0031002e00200053005400410043004b00200054004500430048004e0049005100550045002000280049004d005000c9005200410054004900460029>/Dest [6 0 R /XYZ 62.25 383.834764 0]/Count 0/Prev 24 0 R/Parent 23 0 R/Next 26 0 R>>
+  -> obj 26 : <</Title (2. VUE D'ENSEMBLE)/Dest [6 0 R /XYZ 62.25 168.464764 0]/Count 0/Prev 25 0 R/Parent 23 0 R/Next 27 0 R>>
+  -> obj 27 : <</Title (3. BOUCLE DE JEU DE BASE)/Dest [8 0 R /XYZ 62.25 684.434764 0]/Count 0/Prev 26 0 R/Parent 23 0 R/Next 28 0 R>>
+  -> obj 28 : <</Title (4. RESSOURCES)/Dest [8 0 R /XYZ 62.25 393.374764 0]/Count 0/Prev 27 0 R/Parent 23 0 R/Next 29 0 R>>
+  -> obj 29 : <</Title <feff0035002e0020005300590053005400c8004d00450020004400450020005200c90046004c0045005800450053002000280051005400450029002020140020004c00450020004301520055005200200044005500200053004b0049004c004c>/Dest [8 0 R /XYZ 62.25 174.314764 0]/Count 0/Prev 28 0 R
+  -> obj 30 : <</Title <feff0036002e0020005000480041005300450020004400270041005400540041005100550045002020140020004f005000540049004f004e005300200044004900530050004f004e00490042004c00450053>/Dest [10 0 R /XYZ 62.25 516.674764 0]/Count 0/Prev 29 0 R/Parent 23 0 R/Next 31 0 R>
+  -> obj 31 : <</Title <feff0037002e0020005000480041005300450020004400450020004400c900460045004e00530045002020140020004f005000540049004f004e005300200044004900530050004f004e00490042004c00450053>/Dest [10 0 R /XYZ 62.25 327.494764 0]/Count 0/Prev 30 0 R/Parent 23 0 R/Next 32 
+  -> obj 32 : <</Title <feff0038002e00200053005400410054005500540053002000260020004500460046004500540053002000280054004f0055004a004f005500520053002000410046004600490043004800c900530020003a00200049004300d4004e00450020002b0020004e004f004d00420052004500200044004500200054004f00
+  -> obj 33 : <</Title <feff0039002e0020005300590053005400c8004d00450020004400450020004400450043004b>/Dest [12 0 R /XYZ 62.25 466.514764 0]/Count 0/Prev 32 0 R/Parent 23 0 R/Next 34 0 R>>
+  -> obj 34 : <</Title (10. LES 8 PERSONNAGES)/Dest [14 0 R /XYZ 62.25 328.016014 0]/Count 0/Prev 33 0 R/Parent 23 0 R/Next 35 0 R>>
+  -> obj 35 : <</Title (11. MODES DE JEU)/Dest [16 0 R /XYZ 62.25 163.379764 0]/Count 0/Prev 34 0 R/Parent 23 0 R/Next 36 0 R>>
+  -> obj 36 : <</Title (12. IA ADVERSE)/Dest [18 0 R /XYZ 62.25 590.294764 0]/Count 0/Prev 35 0 R/Parent 23 0 R/Next 37 0 R>>
+  -> obj 37 : <</Title <feff00310033002e00200053004300c8004e004500200044004500200043004f004d004200410054002c00200041004e0049004d004100540049004f004e005300200026002000470041004d00450020004600450045004c>/Dest [18 0 R /XYZ 62.25 408.494764 0]/Count 0/Prev 36 0 R/Parent 23 0 R/
+  -> obj 38 : <</Title <feff00310034002e00200041005500440049004f0020002800310030003000200025002000500052004f004300c90044005500520041004c002c002000570045004200200041005500440049004f00200041005000490029>/Dest [18 0 R /XYZ 62.25 200.909764 0]/Count 0/Prev 37 0 R/Parent 23 0 R/
+  -> obj 39 : <</Title (15. UI/UX, i18N & SAUVEGARDE)/Dest [20 0 R /XYZ 62.25 720.434764 0]/Count 0/Prev 38 0 R/Parent 23 0 R/Next 40 0 R>>
+  -> obj 40 : <</Title (16. ARCHITECTURE DE FICHIERS ATTENDUE)/Dest [20 0 R /XYZ 62.25 516.584764 0]/Count 0/Prev 39 0 R/Parent 23 0 R/Next 41 0 R>>
+  -> obj 41 : <</Title <feff00310037002e0020004400c90050004c004f00490045004d0045004e0054002000560045005200430045004c>/Dest [22 0 R /XYZ 62.25 785.639764 0]/Count 0/Prev 40 0 R/Parent 23 0 R/Next 42 0 R>>
+  -> obj 42 : <</Title (18. PLAN DE LIVRAISON \(SUIS-LE DANS L'ORDRE\))/Dest [22 0 R /XYZ 62.25 682.049764 0]/Count 0/Prev 41 0 R/Parent 23 0 R/Next 43 0 R>>
+  -> obj 43 : <</Title <feff00310039002e0020004300520049005400c8005200450053002000440027004100430043004500500054004100540049004f004e00200028005600c900520049004600490045002000430048004100430055004e0020004100560041004e0054002000440045002000460049004e004900520029>/Dest [22 0 R
+  -> obj 44 : <</Count 21/First 23 0 R/Last 23 0 R>>
+  -> obj 53 : <</Type /FontDescriptor/FontName /NIBZWS+Inter-Bold/FontFamily (Inter)/Flags 4/FontBBox [0 -241 1015 969]/ItalicAngle 0/Ascent 969/Descent -241/CapHeight 969/StemV 80/StemH 80/FontFile2 45 0 R>>
+  -> obj 54 : <</Type /Font/Subtype /CIDFontType2/BaseFont /NIBZWS+Inter-Bold/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [2 [728] 5 [728] 73 [732] 95 [607] 137 [584] 197 [269] 281 [561] 292 [911] 321 [758] 375 [639] 384 [653
+  -> obj 55 : <</Type /Font/Subtype /Type0/BaseFont /NIBZWS+Inter-Bold/ToUnicode 52 0 R/Encoding /Identity-H/DescendantFonts [54 0 R]>>
+  -> obj 57 : <</Type /FontDescriptor/FontName /LNXIQZ+Inter/FontFamily (Inter)/Flags 4/FontBBox [0 -241 1000 969]/ItalicAngle 0/Ascent 969/Descent -241/CapHeight 969/StemV 80/StemH 80/FontFile2 46 0 R>>
+  -> obj 58 : <</Type /Font/Subtype /CIDFontType2/BaseFont /LNXIQZ+Inter/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [0 [489] 2 [690] 5 [690] 65 [654] 73 [730] 84 [722] 95 [601] 97 [601] 137 [590] 141 [746] 161 [743] 197 [269
+  -> obj 60 : <</Type /Font/Subtype /Type0/BaseFont /LNXIQZ+Inter/ToUnicode 56 0 R/Encoding 59 0 R/DescendantFonts [58 0 R]>>
+  -> obj 62 : <</Type /FontDescriptor/FontName /QUWLDS+Inter-Bold/FontFamily (Inter)/Flags 4/FontBBox [0 -241 1038 969]/ItalicAngle 0/Ascent 969/Descent -241/CapHeight 969/StemV 80/StemH 80/FontFile2 47 0 R>>
+  -> obj 63 : <</Type /Font/Subtype /CIDFontType2/BaseFont /QUWLDS+Inter-Bold/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [2 [747] 65 [662] 73 [740] 84 [722] 95 [607] 97 [607] 99 [607] 137 [587] 141 [750] 161 [747] 197 [281] 
+  -> obj 64 : <</Type /Font/Subtype /Type0/BaseFont /QUWLDS+Inter-Bold/ToUnicode 61 0 R/Encoding /Identity-H/DescendantFonts [63 0 R]>>
+  -> obj 66 : <</Type /FontDescriptor/FontName /XETOFL+Inter-Bold/FontFamily (Inter)/Flags 4/FontBBox [0 -241 1028 969]/ItalicAngle 0/Ascent 969/Descent -241/CapHeight 969/StemV 80/StemH 80/FontFile2 48 0 R>>
+  -> obj 67 : <</Type /Font/Subtype /CIDFontType2/BaseFont /XETOFL+Inter-Bold/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [2 [739] 65 [658] 73 [737] 84 [717] 95 [607 607 607] 137 [586] 141 [747] 161 [740] 197 [276] 266 [579] 
+  -> obj 68 : <</Type /Font/Subtype /Type0/BaseFont /XETOFL+Inter-Bold/ToUnicode 65 0 R/Encoding /Identity-H/DescendantFonts [67 0 R]>>
+  -> obj 70 : <</Type /FontDescriptor/FontName /PXIPUI+Noto-Sans-Mono/FontFamily (Noto Sans Mono)/Flags 5/FontBBox [0 -293 600 1069]/ItalicAngle 0/Ascent 1069/Descent -293/CapHeight 1069/StemV 80/StemH 80/FontFile2 49 0 R>>
+  -> obj 71 : <</Type /Font/Subtype /CIDFontType2/BaseFont /PXIPUI+Noto-Sans-Mono/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [3 [600] 10 [600 600 600] 14 [600 600 600 600 600 600 600] 22 [600 600 600 600] 27 [600] 29 [600] 3
+  -> obj 72 : <</Type /Font/Subtype /Type0/BaseFont /PXIPUI+Noto-Sans-Mono/ToUnicode 69 0 R/Encoding /Identity-H/DescendantFonts [71 0 R]>>
+  -> obj 74 : <</Type /FontDescriptor/FontName /VUDHXW+InterItalic-Italic/FontFamily (InterItalic)/Flags 68/FontBBox [0 -241 986 969]/ItalicAngle 0/Ascent 969/Descent -241/CapHeight 969/StemV 80/StemH 80/FontFile2 50 0 R>>
+  -> obj 75 : <</Type /Font/Subtype /CIDFontType2/BaseFont /VUDHXW+InterItalic-Italic/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [65 [654] 73 [730] 84 [721] 95 [602] 97 [602] 137 [590] 197 [269] 281 [565] 292 [903] 321 [765]
+  -> obj 76 : <</Type /Font/Subtype /Type0/BaseFont /VUDHXW+InterItalic-Italic/ToUnicode 73 0 R/Encoding /Identity-H/DescendantFonts [75 0 R]>>
+  -> obj 78 : <</Type /FontDescriptor/FontName /YJWMYI+Noto-Sans-Mono-Bold/FontFamily (Noto Sans Mono)/Flags 5/FontBBox [0 -293 600 1069]/ItalicAngle 0/Ascent 1069/Descent -293/CapHeight 1069/StemV 80/StemH 80/FontFile2 51 0 R>>
+  -> obj 79 : <</Type /Font/Subtype /CIDFontType2/BaseFont /YJWMYI+Noto-Sans-Mono-Bold/CIDSystemInfo <</Registry (Adobe)/Ordering (Identity)/Supplement 0>>/CIDToGIDMap /Identity/W [17 [600 600] 68 [600] 70 [600 600 600] 75 [600] 85 [600 600 600]]/FontDescriptor 78 0 R>>
+  -> obj 80 : <</Type /Font/Subtype /Type0/BaseFont /YJWMYI+Noto-Sans-Mono-Bold/ToUnicode 77 0 R/Encoding /Identity-H/DescendantFonts [79 0 R]>>
+  -> obj 81 : <</NIBZWS 55 0 R/LNXIQZ 60 0 R/QUWLDS 64 0 R/XETOFL 68 0 R/PXIPUI 72 0 R/VUDHXW 76 0 R/YJWMYI 80 0 R>>
+  -> obj 83 : <</ExtGState <</a1.0 <</ca 1>>>>/XObject <<>>/Pattern <<>>/Shading <<>>/ColorSpace 3 0 R/Font 81 0 R>>
+  -> obj 84 : <</Producer (WeasyPrint 70.0)/Title <feff00310037006300630064003200370064002d0037006600300037002d0034003000650065002d0039003600650030002d003800300037003600380039003300650064003400300063002020130020002d>/Creator (pandoc)>>

@@ -1,0 +1,25 @@
+y=117.8 x=83.0 s=1.0 :: PROMPT À COPIER-COLLER — ARROWFALL
+y=169.5 x=99.8 s=1.0 :: Copie tout le contenu de ce document et 
+y=187.5 x=99.8 s=1.0 :: est auto-suffisant : l'IA n'a besoin d'a
+y=261.5 x=83.0 s=1.0 :: Tu es un développeur front-end senior ex
+y=279.5 x=83.0 s=1.0 :: machine à états). Ta mission : développe
+y=279.5 x=321.5 s=1.0 :: ARROWFALL
+y=279.5 x=396.1 s=1.0 :: , un jeu de combat tour par tour stratég
+y=297.5 x=83.0 s=1.0 :: mécanique de réflexes (QTE), complet, po
+y=297.5 x=612.8 s=1.0 :: intégralement
+y=315.5 x=83.0 s=1.0 :: fonctionnel
+y=315.5 x=149.8 s=1.0 ::  : chaque fichier complet, sans placehol
+y=355.1 x=83.0 s=1.0 :: 0. RÈGLES DE LIVRAISON (CRITIQUES)
+y=392.7 x=102.8 s=1.0 :: Livre le projet 
+y=392.7 x=183.3 s=1.0 :: fichier par fichier
+y=392.7 x=284.4 s=1.0 :: , chacun précédé de son chemin complet (
+y=392.7 x=551.0 s=1.0 :: src/components/
+y=413.4 x=102.8 s=1.0 :: battle/HealthBar.tsx
+y=413.4 x=272.9 s=1.0 :: ).
+y=435.6 x=102.8 s=1.0 :: Chaque fichier doit être 
+y=435.6 x=239.7 s=1.0 :: complet et compilable
+y=435.6 x=369.0 s=1.0 ::  en TypeScript strict. Interdiction abso
+y=453.6 x=102.8 s=1.0 :: des commentaires du type « // reste du c
+y=475.5 x=102.8 s=1.0 :: Si tu atteins ta limite de longueur : ar
+y=493.5 x=102.8 s=1.0 :: SUITE (phase X)
+y=493.5 x=197.8 s=1.0 ::  » avec la liste des fichiers restants, 

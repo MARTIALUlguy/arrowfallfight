@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --night: #05070f;
+}
+
+html,
+body {
+  min-height: 100%;
+  background-color: var(--night);
+  color: #e8ecff;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-body antialiased;
+  min-width: 320px;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79, 125, 255, 0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 110%, rgba(160, 92, 255, 0.12), transparent);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #9fd8ff;
+  outline-offset: 3px;
+}
+
+.game-shell {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.battle-scene {
+  width: min(100%, 56rem);
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+}
+
+.combat-controls button {
+  min-height: 2.75rem;
+}
+
+/* Titre néon générique */
+.neon-title {
+  text-shadow:
+    0 0 8px rgba(79, 125, 255, 0.8),
+    0 0 24px rgba(79, 125, 255, 0.4),
+    0 0 48px rgba(160, 92, 255, 0.3);
+}
+
+/* Scrollbars discrètes */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #232d63 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #232d63;
+  border-radius: 4px;
+}
+
+@keyframes fighter-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes arena-impact {
+  0% { transform: translateX(0); filter: brightness(1); }
+  20% { transform: translateX(-5px); filter: brightness(1.7); }
+  45% { transform: translateX(4px); }
+  70% { transform: translateX(-2px); filter: brightness(1.2); }
+  100% { transform: translateX(0); filter: brightness(1); }
+}
+
+.battle-idle {
+  animation: fighter-float 2.8s ease-in-out infinite;
+}
+
+.battle-idle-delayed {
+  animation-delay: -1.4s;
+}
+
+.battle-impact {
+  animation: arena-impact 360ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .battle-idle,
+  .battle-impact {
+    animation: none;
+  }
+}

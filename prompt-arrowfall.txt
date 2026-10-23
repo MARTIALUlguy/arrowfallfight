@@ -1,0 +1,420 @@
+
+
+========== PAGE 1 ==========
+
+PROMPT À COPIER-COLLER — ARROWFALL
+Copie tout le contenu de ce document et colle-le dans un nouveau chat de l'IA sélectionnée. Le prompt
+est auto-suffisant : l'IA n'a besoin d'aucun autre contexte.
+Tu es un développeur front-end senior expert en jeux web (game feel, animations, architectures React à
+machine à états). Ta mission : développer ARROWFALL  , un jeu de combat tour par tour stratégique avec
+mécanique de réflexes (QTE), complet, poli, déployable sur Vercel. Tu dois produire un projet intégralement
+fonctionnel : chaque fichier complet, sans placeholder, sans pseudo-code, sans « ... ».
+0. RÈGLES DE LIVRAISON (CRITIQUES)
+1.
+Livre le projet fichier par fichier, chacun précédé de son chemin complet (ex. src/components/
+battle/HealthBar.tsx  ).
+2. Chaque fichier doit être complet et compilable en TypeScript strict. Interdiction absolue de tronquer avec
+des commentaires du type « // reste du code ici ».
+3. Si tu atteins ta limite de longueur : arrête-toi proprement après un fichier complet, puis écris exactement «
+SUITE (phase X)   » avec la liste des fichiers restants, pour que l'utilisateur réponde « continue ». Reprends
+ensuite là où tu t'es arrêté, sans rien regénérer.
+4. Suis le plan de livraison en phases de la section 18 : une phase = un lot de fichiers finis et testables. À la
+fin de chaque phase, écris un mini récapitulatif de ce qui est jouable. 5 Aucune dépendance payante,
+aucun fichier binaire (image/audio) externe : tout est généré en code (SVG, Canvas, Web Audio).
+5. Vérifie la cohérence des types entre fichiers au fur et à mesure (mêmes noms d'interfaces partout).
+1. STACK TECHNIQUE (IMPÉRATIF)
+• Next.js 14+ (App Router) + TypeScript strict — déploiement 100 % statique sur Vercel, aucun backend.
+• React + Zustand   pour l'état de jeu ; le combat est piloté par une machine à états explicite (implémente-la
+à la main, claire et commentée).
+• Canvas 2D   pour la scène de combat (personnages, particules, effets) ; SVG inline + animations CSS   pour
+les personnages et l'UI (style vector/anime stylisé).
+• Tailwind CSS + Framer Motion   pour l'interface (menus, cartes, écrans).
+• Web Audio API   pour la musique et les SFX 100 % procéduraux (voir section 14).
+• i18n FR/EN maison : deux fichiers de traduction + contexte React + sélecteur de langue.
+• localStorage pour la sauvegarde (progression, decks, options, records).
+•
+Zéro package au-delà de : next  , react  , zustand  , framer-motion  , tailwindcss  ,
+typescript  , peerjs   (uniquement pour le PvP en ligne, phase bonus).
+2. VUE D'ENSEMBLE
+Pitch : deux duelist s'affrontent en 1v1 dans une arène néon. Chaque tour, l'attaquant choisit une action, le
+défenseur réagit à l'aveugle, puis les deux s'affrontent en duel de réflexes (séquences de flèches) qui décide
+de l'efficacité réelle des actions. Combinaison de stratégie (deck-building, gestion d'énergie/mana, mind-
+games) et de skill (QTE).
+
+
+========== PAGE 2 ==========
+
+Direction artistique : vector/anime stylisé, fond sombre bleu-nuit, décors néon en parallaxe, chaque
+personnage a sa couleur d'accent et son aura. Typographie moderne condensée pour les titres. Les effets
+(statuts, dégâts, soins, boucliers) ont chacun une couleur + une icône SVG + un effet visuel Canvas
+clairement identifiables. Objectif : « lisse et impressionnant », impression de combat, d'action et d'impact à
+chaque frappe.
+Nom du jeu   : ARROWFALL (les « arrows » = flèches directionnelles du système de réflexes).
+3. BOUCLE DE JEU DE BASE
+Un match oppose deux combattants. Un   tour complet = chaque combattant joue une fois en attaque. Déroulé
+d'une moitié de tour (joueur A attaquant, B défenseur) :
+1. Début de tour de A : A pioche 1 carte (main max 7, 5 cartes en main au début du match), régénère +4
+énergie ET +4 mana (plafonnés à 10), les effets de fin de tour (brûlure, poison, régén…) tiquent.
+2. Phase d'action de A (attaque) : A choisit son attaque (voir section 6) — l'UI affiche cartes en main,
+compétences, attaque classique, super/ultime.
+3. Phase de réaction de B (défense) : B voit uniquement   le portrait de A en « pose d'attaque » (pas l'action
+choisie) et choisit sa défense (section 7). C'est le cœur du mind-game : deviner mêlée ou distance, gros
+coup ou petit coup.
+4. Duel de réflexes : QTE de A (puissance de l'attaque), puis QTE de B (efficacité de la défense) —voir
+section 5.
+5. Résolution animée   : la scène Canvas joue l'attaque, la défense, les impacts, les chiffres flottants, les
+statuts appliqués (le tout 2 à 4 secondes, punchy, avec hit-stop et screen-shake).
+6. Fin de moitié de tour : vérification de mort, puis inversion des rôles (B devient attaquant).
+Premier joueur : aléatoire en PvP, joueur en campagne/survie. Victoire : HP adverse à 0, ou timeout (20 tours
+complets → le plus haut % de HP gagne ; égalité = mort subite, tous les HP à 20).
+4. RESSOURCES
+• HP   : 100 par défaut (certains personnages 90 ou 110, voir section 10).
+• Énergie (jaune) : max 10, +4/tour. Paie les attaques/défenses corps à corps.
+• Mana (bleu)   : max 10, +4/tour. Paie les attaques/défenses distance et la plupart des utilitaires.
+• Jauge de Super (violet) : 0→100. Gains : +8 par attaque subie, +5 par attaque infligée, +5 par QTE réussi
+(Perfect), +15 par QTE Perfect. À 100 : le joueur peut activer le mode Super pendant sa phase d'action.
+• Mode Super   : dure 3 moitiés de tour. Effets : aura animée autour du personnage, +20 % de dégâts infligés,
+déblocage de la compétence Ultime   (une seule utilisation, n'importe quand pendant les 3 tours), les QTE
+de l'ultime rapportent le double de jauge... non — l'ultime ne rapporte rien (il consomme le mode).
+L'activation consomme toute la jauge.
+• Cartes : main de départ 5 cartes, pioche 1 au début de chaque moitié de tour attaque, max 7 en main (au-
+delà : la carte piochée est brûlée avec un effet visuel). Deck épuisé : remélange les cartes défaussées (la
+défausse est une pile visible et comptée dans l'UI).
+5. SYSTÈME DE RÉFLEXES (QTE) — LE CŒUR DU SKILL
+Chaque attaque et chaque défense déclenche une   séquence de flèches directionnelles (↑↓←→) à réussir en
+un temps limité :
+• Longueur de séquence   = puissance de l'action : attaque classique = 3 flèches ; carte/capacité faible = 4 ;
+puissante = 5 ; ultime = 7. Défense classique = 3 ; défense carte = 4-5.
+
+
+========== PAGE 3 ==========
+
+• Temps total dépend de la puissance : 3 flèches = 2,0 s ; 4 = 1,9 s ; 5 = 1,8 s ; 7 = 2,2 s (l'ultime laisse plus
+de temps mais enchaîne plus vite entre les inputs). Temps par input = temps total / longueur.
+• Rendu   : les flèches apparaissent une par une au centre (grandes, couleur du joueur), avec un anneau de
+temps qui se vide. Un input correct fait « pop » la flèche (particules + son), un mauvais input clignote
+rouge et la séquence continue (on ne peut pas rater définitivement mi-séquence : on calcule la précision à
+la fin).
+•
+Précision : chaque input est mesuré. Perfect   (bon input du premier coup) ; Good   (bon input après un
+ou deux mauvais essais sur cette flèche) ; Miss   (flèche expirée ou 3+ erreurs).
+•
+Modulation des dégâts   : Multiplicateur = 0,6 + 0,4 × (Perfect + 0,5 × Good) /
+total  . 100 % Perfect → ×1,0 + l'action gagne un petit bonus (+10 % dégâts ou +10 % blocage) et la
+jauge de Super +5. Beaucoup de Miss → jusqu'à ×0,6.
+• Effets de statut : certaines actions n'appliquent leur statut (Étourdi, Gel…) que si le QTE est
+majoritairement Perfect. C'est indiqué sur la carte par une icône de flèche dorée.
+• Gel : réduit le temps de QTE de 25 % pour la victime. Célérité : +25 % de temps.
+• En PvP local : les deux joueurs jouent sur le même clavier (ZQSD/flèches pour J1... non : les QTE utilisent
+les flèches pour les DEUX joueurs, séquentiellement — attaquant puis défenseur — donc pas de conflit).
+• Accessibilité : option « Mode zen » (QTE sans chrono, multiplicateur fixé à 0,85) dans les paramètres.
+6. PHASE D'ATTAQUE — OPTIONS DISPONIBLES
+1. Attaque classique (toujours dispo, sans coût) : « Frappe rapide » mêlée — 8 dégâts, imparable   (aucune
+défense ne la réduit, seul le QTE la module), QTE de 3 flèches.
+2. Jouer une carte de sa main : coûts énergie/mana propres, effets détaillés (section 9). Une seule carte par
+action.
+3. Compétence de base du personnage   (attaque) : 1 par perso, coût modéré, effet signature (section 10).
+Une compétence a un cooldown de 2 moitiés de tour (indiqué dans l'UI).
+4. Activer le mode Super (si jauge 100) : l'action de ce tour se fait avec +20 % de dégâts, et l'ultime devient
+jouable.
+5. Compétence Ultime   (si mode Super actif) : action dévastatrice propre au personnage, QTE de 7 flèches,
+consomme le mode Super.
+7. PHASE DE DÉFENSE — OPTIONS DISPONIBLES
+1. Défense classique (sans coût) : « Garde » — réduit les dégâts de 40 %, QTE de 3 flèches qui module la
+réduction (Perfect → 55 %).
+2. Jouer une carte de défense   : boucliers, renvoi, esquive, riposte (section 9).
+3. Compétence de base du personnage   (défense) : 1 par perso (section 10), cooldown 2 moitiés de tour.
+4. Compétence Ultime défensive   (si mode Super actif) : version défensive de l'ultime (section 10 — chaque
+ultime a un usage offensif OU défensif précisé).
+5. Ne rien faire est impossible : la Garde est choisie automatiquement si le timer de sélection (20 s) expire.
+Règles de résolution : l'attaque classique est imparable  . Les autres attaques sont réduites par les défenses
+selon leur ratio (60-80 %), potentiellement annulées par une esquive, ou renvoyées. Les dégâts traversent
+d'abord le Bouclier (absorption), puis les HP. Les statuts s'appliquent après résolution.
+
+
+========== PAGE 4 ==========
+
+8. STATUTS & EFFETS (TOUJOURS AFFICHÉS : ICÔNE + NOMBRE DE
+TOURS + TOOLTIP)
+Statut  Icône (SVG)  Couleur  Effet
+Brûlure   flamme  orange  3 dégâts fin de tour (n'empile pas, se rafraîchit)
+Saignement   goutte  rouge  2 dégâts à chaque action du porteur (cumulable ×3)
+Poison ☠  fiole  vert  1 dégât, +1 par tour, cumulable
+Gel ❄  flocon  cyan  temps de QTE −25 %
+Étourdi   spirale  jaune  saute la prochaine phase d'action (auto-Garde)
+Bouclier 🛡  écu  bleu clair  absorbe X dégâts (cumulable)
+Régén ✚  cœur  vert clair  soigne 4 HP fin de tour
+Faiblesse ↓  sablier brisé  gris  −20 % de dégâts infligés (2 tours)
+Célérité ↑  éclair  blanc  +25 % de temps de QTE
+Marque   cible  violet  +25 % de dégâts subis (2 tours)
+Silence   bouche barrée  violet foncé  impossible de jouer de cartes (1 tour)
+Chaque statut appliqué/retiré/tick a son burst de particules et son SFX. Les statuts sur un personnage sont
+visibles sous sa barre de HP.
+9. SYSTÈME DE DECK
+Règles : deck d'exactement 20 cartes, construit après la sélection du personnage et avant le combat. Max 2
+copies d'une même carte (max 1 pour les épiques). Le deck contient des cartes universelles + les cartes
+signature du personnage choisi.
+Deck universel de base   (toutes disponibles dès le début) :
+#  Carte  Type  Coût  Effet  QTE  Rareté
+1  Frappe éclair  Attaque mêlée  2 É  12 dégâts  4  Commune
+2  Frappe lourde  Attaque mêlée  4 É  22 dégâts  5  Commune
+3  Percée du berserk  Attaque mêlée  3 É  10 dégâts, +10 si vos HP < 50 %  4  Rare
+4  Coup bas  Attaque mêlée  3 É  6 dégâts + Étourdi si Perfect  5  Épique
+8 + 100 % des dégâts subis depuis votre dernier
+5  Vengeance  Attaque mêlée  3 É  4  Épique
+tour
+6  Marteau sismique  Attaque mêlée  5 É  18 dégâts + retire 2 Énergie adverse  5  Rare
+Attaque
+7  Boule de feu  3 M  14 dégâts + Brûlure  4  Commune
+distance
+Attaque
+8  Chaîne d'éclairs  4 M  10 dégâts, ignore le Bouclier  4  Rare
+distance
+Flèche perce-  Attaque  12 dégâts, ignore 100 % de la défense adverse
+9  3 M  5  Rare
+armure  distance  (sauf Garde parfaite)
+Attaque
+10  Trait de givre  2 M  8 dégâts + Gel (1 tour)  3  Commune
+distance
+Attaque
+11  Poison insidieux  2 M  4 dégâts + Poison 2  3  Commune
+distance
+12  Parade d'acier  Défense  2 É  bloque 60 %  4  Commune
+
+
+========== PAGE 5 ==========
+
+#  Carte  Type  Coût  Effet  QTE  Rareté
+13  Bloc de titan  Défense  4 É  bloque 80 % + Bouclier 5  5  Commune
+14  Garde de fer  Défense  2 É  bloque 40 % + riposte 6 si l'attaque est mêlée  4  Commune
+15  Danse de l'ombre  Défense  3 É  bloque 30 % + annule tout si Perfect  5  Rare
+16  Mur de mana  Défense  3 M  bloque 60 % + régénère 2 Mana  4  Commune
+17  Carapace de givre  Défense  2 M  bloque 50 % + Gel à l'attaquant  4  Commune
+Prisme
+18  Défense  4 M  bloque 50 % + renvoie 30 % des dégâts bloqués  5  Épique
+réfléchissant
+19  Second souffle  Utilitaire  3 M  soigne 12 HP  —  Commune
+20  Concentration  Utilitaire  1 M  pioche 2 cartes  —  Commune
+21  Coup critique  Buff  2 É  prochaine attaque +50 %  —  Rare
+22  Adrénaline  Buff  2 É  +25 jauge de Super  —  Rare
+23  Vol d'éther  Utilitaire  3 M  vole 2 Énergie et 2 Mana  —  Épique
+révèle le type (mêlée/distance) de la prochaine
+24  Préméditation  Utilitaire  2 M  —  Rare
+action adverse
+25  Échange sanglant  Utilitaire  0  −8 HP → +4 É et +4 M  —  Rare
+26  Purge  Utilitaire  2 M  retire tous vos statuts négatifs  —  Commune
+(É = Énergie, M = Mana. La colonne QTE = nombre de flèches ; « — » = pas de QTE, effet instantané joué
+pendant votre phase d'action.)
+UI du deck-builder : grille de cartes filtrable (type, coût, rareté), compteur 20 cartes, courbe de coûts, préset
+« deck recommandé » par personnage (défini dans ses data), aperçu au survol avec effet détaillé. Le deck de
+base universel (20 cartes équilibrées) est proposé par défaut.
+Design des cartes : cadre selon la rareté (bronze/argent/or), bande de couleur selon le type (rouge attaque,
+bleu défense, vert utilitaire), coût en haut à gauche dans un glyphe énergie/mana, illustration = composition
+SVG abstraite par carte (arme, flamme, éclat...), texte d'effet concis + tooltip complet, badge doré si l'effet
+dépend d'un QTE Perfect.
+10. LES 8 PERSONNAGES
+Chacun : portrait + sprite vector animé (idle, attaque mêlée, attaque distance, dégâts, défense, ultime, victoire,
+défaite — animés via CSS keyframes sur des groupes SVG), une mécanique unique  , une couleur d'accent, 6+
+répliques distinctes (attaque, dégâts, victoire, défaite, ultime, taunt) affichées en bulle de dialogue + stockées
+pour l'i18n EN.
+1. KAËL — Samouraï spectral   (accent rouge) — mêlée/Énergie. HP 100. Mécanique : Saignement cumulatif
+(ses attaques saignent, et chaque application coûte +1 Énergie de moins si la cible saigne déjà).
+◦ Comp. attaque : Lame éternelle (3 É) — 10 dégâts + Saignement. Comp. défense : Posture du fer (2 É)
+— bloque 50 %, riposte 8 dégâts si Perfect. Ultime : Mille lames — 6 coups de 5 dégâts + 2
+Saignement, uniquement offensif. Signature : Entaille profonde (2 É, 8 + Saignement×2), Iaido (1 É,
+annule une attaque mêlée si Perfect), Éveil du Dragon (buff, +30 jauge).
+2. LYRA — Pyromancienne   (orange) — distance/Mana. HP 95. Mécanique : Combustion   (chaque brûlure
+rafraîchie inflige +2 dégâts au tick suivant, cumulé jusqu'à ×3).
+◦ Comp. attaque : Trait enflammé (2 M) — 10 dégâts + Brûlure. Comp. défense : Mur de flammes   (3 M) —
+bloque 55 %, Brûlure à l'attaquant si mêlée. Ultime : Comète d'éther   — 30 dégâts + Brûlure majorée +
+Faiblesse. Signature : Souffle ardent (1 M, transforme votre Brûlure active en dégâts directs), Volatile (3
+M, 12 dégâts, +8 si la cible brûle), Surchauffe (buff, +25 jauge + prochaine carte distance −1 M).
+
+
+========== PAGE 6 ==========
+
+3. VÖRN — Colosse runique   (gris-bleu) — mêlée/Énergie. HP 120. Mécanique : Runes de garde   (gagne un
+Bouclier 4 à chaque fois qu'il encaisse des dégâts ≥ 10).
+◦ Comp. attaque : Fracasse-runique   (4 É) — 16 dégâts + retire 1 statut positif adverse. Comp. défense :
+Peau de pierre (3 É) — bloque 70 % + Bouclier 8 si Perfect. Ultime : Barrage runique — offensif ET
+défensif : 20 dégâts à l'adversaire ET vous gagnez Bouclier 20. Signature : Provocation (défense,
+bloque 50 % + l'attaque adverse suivante coûte +1), Écrasement   (5 É, 20 dégâts, brise 50 % du bouclier
+adverse), Cœur de granite (buff, +Bouclier 10).
+4. SYLPHE — Voleuse de vents   (vert menthe) — hybride É/M. HP 90. Mécanique : Vol de ressources   (vole 1
+Énergie à chaque attaque réussie, 1 Mana sur les défenses réussies).
+◦ Comp. attaque : Lames jumelles   (2 É) — 2×6 dégâts, vole 1 Énergie par coup réussi. Comp. défense :
+Danse du vent   (2 É) — bloque 40 % + esquive totale si Perfect. Ultime : Tempête filante — 5×4 dégâts,
+vole 2 É et 2 M, +Célérité 2 tours. Signature : Botte secrète (1 É, 6 dégâts + vole 2 Énergie si Perfect),
+Brise d'éther (2 M, bloque 45 % + vole 2 Mana), Pas de l'ombre (buff, votre prochaine QTE n'a que des
+Perfects requis — jauge +30).
+5. MORDRAK — Nécromancien   (violet) — distance/Mana. HP 100. Mécanique : Moisson   (récupère en HP 25
+% des dégâts de poison/saignement infligés).
+◦ Comp. attaque : Trait d'âme (2 M) — 9 dégâts + soigne 3. Comp. défense : Voile d'os (3 M) — bloque
+55 % + convertit 3 dégâts bloqués en Mana. Ultime : Fauche des âmes   — 24 dégâts + Poison 3 +
+soigne 12. Signature : Siphon (2 M, applique Poison 2 + soigne 4), Pacte sombre   (0, −10 HP → +5 M),
+Ossements   (défense 2 M, bloque 45 % + riposte Poison 1).
+6. AÏKO — Moine du lotus   (rose) — mêlée/Énergie. HP 105. *Mécanique : Fluidité — chaque Perfect
+consécutif (attaque ET défense, compteur visible) lui donne +2 Énergie au prochain tour (max +6).
+◦ Comp. attaque : Paume vibrante   (2 É) — 11 dégâts, +3 si votre dernier QTE était Perfect. Comp.
+défense : Méditation (1 É) — bloque 45 % + soigne 5 + purge un statut négatif. Ultime : Lotus ascendant
+— défensif ET offensif : bloque 80 % de la prochaine attaque ET riposte 18 dégâts + Régén. Signature :
+Enchaînement   (3 É, 2×7 dégâts, +5 si double Perfect), Boucle d'éther (2 É, garde + garde votre
+compteur de Perfects), Sérénité (buff, +Régén 2 tours).
+7. ÉCHO — Chasseresse de précision   (cyan) — distance/Mana. HP 90. Mécanique : Chasse   — ses attaques
+Perfect appliquent une Marque (cumulable ×3, +25 % dégâts subis chacun).
+◦ Comp. attaque : Tir chargé (3 M) — 13 dégâts, +5 par Marque. Comp. défense : Pas de l'ombre (1 M) —
+bloque 35 % + recul : votre prochaine attaque +25 %. Ultime : Châtiment stellaire — 8 dégâts ×nombre
+de flèches réussies (jusqu'à 56) + Marque ×2. Signature : Flèche marquante   (2 M, 8 + Marque), Vue de
+faucon   (buff, +1 flèche en moins sur vos QTE ce tour — min 3), Piège (défense 2 M, bloque 40 % +
+pose Marque si mêlée).
+8. NYRA — Mage de givre   (bleu glacier) — distance/Mana. HP 95. Mécanique : Hypothermie   — si la cible
+est Gelée, toutes ses attaques +30 % et ses QTE adverses ont −1 flèche.
+◦ Comp. attaque : Éclat de givre (2 M) — 9 dégâts + Gel. Comp. défense : Barrière de glace (2 M) —
+bloque 55 % + Gel l'attaquant si Perfect. Ultime : Zéro absolu — 20 dégâts + Gel 2 tours + Étourdi si
+Perfect. Signature : Blizzard (4 M, 12 dégâts AoE — applique Gel aux deux), Flocon vengeur   (2 M,
+riposte 10 + Gel si attaqué), Cœur froid (buff, annule votre prochain Gel subi + +15 jauge).
+Toutes les valeurs (HP, coûts, dégâts, cooldowns, répliques) vivent dans src/data/characters.ts   —
+l'équilibrage ne demande aucune modification de logique ailleurs.
+11. MODES DE JEU
+1. Campagne (Joueur vs IA)   — 8 duels aux règles légèrement croissantes : chaque chapitre présente un
+adversaire (les 8 persos dans un ordre scénaristique), avec 2-3 écrans de dialogue avant le combat et 1
+après (victoire/défaite). L'IA augmente de difficulté par chapitre. Récompense de chapitre : +2-3 nouvelles
+cartes universelles débloquées + le deck-type du perso vaincu devient jouable. Écran de sélection de
+chapitre, progression sauvegardée.
+
+
+========== PAGE 7 ==========
+
+2. PvP local (Joueur vs Joueur) — même écran : sélection des persos, decks (présets ou perso), combat. Le
+défenseur choisit sa défense sans voir l'attaque (l'UI de l'attaquant se masque automatiquement pendant
+le choix défensif — overlay « Joueur 2, à toi »).
+3. Survie (Joueur vs IA) — vagues infinies : chaque vague = un perso IA aléatoire avec difficulté croissante ;
+vous conservez HP, énergie/mana et main entre les vagues ; entre deux vagues, choisissez 1 bonus parmi
+3 (soin 25, +3 max Énergie, +3 max Mana, +1 carte en main max, pioche 2, +20 jauge). Score = nombre de
+vagues, high-score sauvegardé + écran de records.
+4. Co-op vs IA — 1 joueur + 1 allié IA (ou 2 joueurs locaux) contre un boss   (HP 250, 2 actions par tour, kit
+combiné de 2 personnages). L'allié IA choisit des actions complémentaires (soigne/bouclier si le joueur est
+bas, attaque sinon). Boss final de campagne débloqué aussi ici.
+5. PvP en ligne (BONUS, dernière phase)   — via PeerJS (WebRTC) : un joueur héberite (code de salon),
+l'autre rejoint ; sync des actions par messages, l'hôte arbitre. Si trop complexe, livre un README détaillant
+l'architecture prévue.
+12. IA ADVERSE
+Machine à états reliée au même moteur que le joueur (aucune logique dupliquée). Comportements :
+• Facile : choisit semi-aléatoirement (70 % correct), ne regarde pas vos statuts, QTE simulé à ~50 % de
+Perfect.
+• Normale   : score chaque option (dégâts nets, coûts, HP, boucliers, statuts, lethality check), choisit le
+meilleur avec 20 % d'aléa, QTE ~75 %.
+• Difficile : évalue aussi vos probabilités de défense (history de vos choix), garde ses ressources pour les
+combos, joue l'ultime au moment optimal, QTE ~90 %. En campagne : difficulté croissante facile→difficile.
+• Le QTE de l'IA est simulé silencieusement mais montré à l'écran (mini séquence de flèches qui se remplit
+toute seule) pour rester lisible et vivante.
+13. SCÈNE DE COMBAT, ANIMATIONS & GAME FEEL
+• Scène Canvas   16:9 : fond parallaxe 3 couches (silhouettes + particules ambiantes + sol néon), deux
+plateformes, les combattants face à face.
+• Personnages   : SVG vector par personnage (silhouette anime reconnaissable, arme signature), animés par
+interpolations (attaque = dash avant + slash, dégâts = recul + flash blanc, défense = aura/bouclier, ultime =
+transformation d'aura + zoom lent + letterbox). Idle = respiration en boucle + particules d'aura.
+• Impacts   : hit-stop 80 ms sur gros coups, screen-shake proportionnel, particules d'impact couleur du type,
+chiffres de dégâts flottants avec style (normal / critique / soigné / bloqué), trainées d'armes.
+• Phases   : bannières animées (« À L'ATTAQUE ! », « DÉFENDS-TOI ! », « ULTIME ! ») avec transitions Framer
+Motion, ralenti + vignette sur les ultimes, fondu noir à la mort avec « K.O. » plein écran.
+• Timeline de tour : petite barre latérale indiquant qui attaque, le n° de tour, et les prochains ticks de statuts.
+•
+Cible : 60 fps, particules poolées, requestAnimationFrame   unique.
+14. AUDIO (100 % PROCÉDURAL, WEB AUDIO API)
+Classe AudioManager   (singleton, reprise du contexte après premier geste utilisateur, toggles musique/
+SFX + volumes sauvegardés) :
+• Musiques   : boucles génératives par scheduler : menu (nappe + arpèges lents), sélection/deck (synthwave
+mid-tempo), combat (basse pulsée + drums synthétisés, tempo 120), intensité qui monte quand un HP <
+30 % (couche de percussion ajoutée), boss (mineur, plus rapide), victoire (fanfare courte), défaite
+(descente sombre). Progressions d'accords par mode, oscillos type sawtooth/square + filtres + réverbe
+simple (delay feedback).
+
+
+========== PAGE 8 ==========
+
+• SFX   : impact mêlée (bruit filtré + pitch drop), impact distance (zap), bouclier (ding métallique), heal (chime
+montant), carte jouée (whoosh + click), QTE input (tick), Perfect (chime cristallin), Miss (buzz doux), super
+activation (riser), ultime (impact + explosion), sélection UI (click discret). Chaque SFX = 3-10 lignes de
+synthèse, aucun fichier.
+15. UI/UX, i18N & SAUVEGARDE
+• Écrans   : Accueil (logo animé, boutons : Campagne / PvP / Survie / Co-op / Bonus en ligne, Options,
+Codex), Options (volumes, langue FR/EN, mode zen, reset save), Sélection perso (carrousel avec fiche
+complète : stats, compétences, mécanique, réplique), Deck-builder, Combat, Résultats (stats du match :
+dégâts totaux, Perfects, cartes jouées, plus longue série), Codex (cartes + personnages + statuts),
+Records.
+• Tutoriel interactif : premier combat de campagne parsemé d'encarts guidés (phases, QTE, super),
+skippable.
+•
+i18n : src/i18n/fr.ts   et src/i18n/en.ts   — 100 % des textes UI, cartes, compétences et
+répliques. Sélecteur FR/EN persistant.
+•
+Save   : localStorage['arrowfall_save_v1']   — options, progression campagne, records,
+decks personnalisés. Bouton reset dans Options.
+16. ARCHITECTURE DE FICHIERS ATTENDUE
+src/
+ app/ (pages Next.js : menu, jeu, codex)
+ components/
+ battle/ (BattleCanvas, HealthBar, ResourceBar, SuperGauge,
+ QTEOverlay, CardHand, StatusTimeline, ActionMenu,
+ PhaseBanner, DamageNumber, VictoryScreen…)
+ menus/ (HomeScreen, CharacterSelect, DeckBuilder, Options…)
+ cards/ (CardFace, CardTooltip)
+ common/ (Button, Modal, LangSelector…)
+ engine/
+ battleStateMachine.ts (états: TURN_START, ATTACK_SELECT, DEFENSE_SELECT,
+ ATTACK_QTE, DEFENSE_QTE, RESOLVE, ANIMATE, CHECK_END)
+ resolver.ts (calcul dégâts, blocage, statuts, triggers)
+ qte.ts (génération de séquence, timing, précision)
+ ai.ts (score d'options, 3 difficultés, simulation QTE)
+ effects.ts (résolution des statuts/ticks)
+ systems/
+ audio.ts (AudioManager, musiques et SFX procéduraux)
+ save.ts i18n.tsx particles.ts rng.ts
+ data/
+ characters.ts cards.ts statuses.ts campaign.ts survival.ts decks.ts
+ types/ (types partagés du domaine : Character, Card, BattleState…)
+Machine à états explicite : type BattleState = { phase, attacker, defender, hp,
+energy, mana, super, hand, deck, discard, statuses, turn, qte?, history }   —
+chaque transition pure et testable, le rendu s'y abonne via Zustand.
+
+
+========== PAGE 9 ==========
+
+17. DÉPLOIEMENT VERCEL
+•
+Projet Next.js statique (output: 'export'   si aucun SSR nécessaire, sinon SSR par défaut qui
+marche aussi) — aucune variable d'environnement, aucune API route obligatoire.
+• Fournis le README.md   : installation (npm i  , npm run dev  ), build (npm run build  ), et guide
+pas-à-pas « pousser sur GitHub → importer dans Vercel → déployé » avec capture-texte des écrans.
+18. PLAN DE LIVRAISON (SUIS-LE DANS L'ORDRE)
+• Phase 0   : scaffold Next.js + Tailwind + types du domaine + data (cartes, statuts, personnages, decks) +
+i18n FR/EN + routing des écrans vides.
+• Phase 1 : moteur de combat complet (machine à états, résolution, IA facile) + un écran de debug jouable
+texte/UI simple : le jeu est déjà jouable de bout en bout sans animations.
+• Phase 2   : QTE complet + scène Canvas + sprites SVG + animations + particules + juice.
+• Phase 3   : cartes rendues + deck-builder + signatures + codex cartes.
+• Phase 4   : les 8 personnages avec compétences/ultimes/cooldowns + IA normale/difficile + équilibrage.
+• Phase 5   : écrans complets (accueil, sélection, options, résultats, records) + campagne (chapitres +
+dialogues + unlocks) + survie + PvP local.
+• Phase 6   : audio procédural complet + tutoriel + save + co-op (+ PvP en ligne PeerJS si budget de réponse
+suffisant, sinon README).
+• Phase 7   : polish global, responsive 16:9 letterboxé, README + guide Vercel, checklist finale.
+19. CRITÈRES D'ACCEPTATION (VÉRIFIE CHACUN AVANT DE FINIR)
+1. Un match complet se joue sans erreur : sélection → deck → combat → victoire/défaite → résultats.
+2. Les 5 options d'attaque et les 4 de défense sont toutes atteignables et fonctionnelles.
+3. Le QTE module réellement les dégâts (testé : 100 % Perfect > 100 % Miss).
+4. Les 26 cartes universelles + les 24 cartes signature existent, sont jouables, visibles dans le codex.
+5. Les 8 personnages ont leurs 2 compétences + ultime + 3 cartes signature + répliques FR/EN.
+6. Mode Super et Ultime fonctionnent (jauge, activation 3 tours, +20 %, consommation).
+7. Les 11 statuts s'appliquent, tiquent, expirent et s'affichent correctement.
+8. Campagne 8 chapitres avec sauvegarde, survie avec records, PvP local, co-op jouables.
+9. Musique + SFX jouent, se coupent, se sauvegardent ; l'audio démarre après interaction utilisateur
+(autoplay policy respectée).
+10. Bascule FR/EN complète, sans texte brut en dur dans les composants.
+11.
+npm run build   passe sans erreur TypeScript ; le jeu tourne à 60 fps sur un laptop moyen.
+12. Aucun fichier binaire, aucune dépendance supplémentaire non listée.
+13. README avec guide de déploiement Vercel.
+Commence par la Phase 0 et suis le plan. Ne me demande aucune clarification : toute décision non tranchée
+par ce document doit être prise par toi en restant fidèle à l'esprit du jeu, et documentée dans le README.
